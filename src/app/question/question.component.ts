@@ -18,6 +18,7 @@ export class QuestionComponent implements OnInit {
   private currentQuestion;
   private answeredQuestions = new Array<any>();
   private quiz: Quiz;
+  private showAnswer = false;
 
   constructor(private httpClient: HttpClient,
               private formBuilder: FormBuilder) {
@@ -33,7 +34,7 @@ export class QuestionComponent implements OnInit {
       .get<any>("/assets/quiz.json")
       .subscribe(data => {
         this.quiz = data;
-        this.currentQuestion = this.quiz.questions.pop();
+        this.showNextQuestion();
       })
   }
 
@@ -41,16 +42,45 @@ export class QuestionComponent implements OnInit {
     this.tipVisible = true;
   }
 
-  submitAnswer(answerData: any) {
-    this.quizForm.reset();
-    console.warn('Your question has not been yet submitted', answerData);
-    this.answeredQuestions.push(this.currentQuestion);
-    this.tipVisible = false;
-    if (this.quiz.questions.length > 0) {
-      this.currentQuestion = this.quiz.questions.pop();
+  handleSubmitButtonClick(answerData: any) {
+    if (this.showAnswer) {
+      console.info('next questino');
+      this.showAnswer = false;
+      this.showNextQuestion();
     } else {
-      console.info("Answers: " + this.answeredQuestions);
+      console.info('show answer');
+      this.showAnswer = true;
+      this.answeredQuestions.push(this.currentQuestion);
     }
   }
 
+  nextQuestion() {
+    this.quizForm.reset();
+    this.tipVisible = false;
+
+    if (this.quiz.questions.length) {
+      this.showNextQuestion();
+    }
+
+  }
+
+  private showNextQuestion() {
+    this.currentQuestion = this.quiz.questions.pop();
+  }
+
+  isAnswerCorrect(): boolean {
+    return true;
+  }
+
+  alertType(): string {
+    return this.isAnswerCorrect() ? 'alert-success' : 'alert-danger';
+  }
+
+  alertMessage(): string {
+    return this.isAnswerCorrect() ? 'Well done!' : 'Wrong';
+  }
+
+  submitButtonText() {
+    return this.showAnswer ? 'Next question' : 'Check';
+  }
 }

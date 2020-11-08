@@ -16,7 +16,7 @@
   </ul>
 </nav>
 <div class="container my-5" *ngIf="currentQuestion">
-  <form [formGroup]="quizForm" (ngSubmit)="submitAnswer(quizForm.value)">
+  <form [formGroup]="quizForm" (ngSubmit)="handleSubmitButtonClick(quizForm.value)">
     <h1>{{currentQuestion.question}}</h1>
 
     <div class="section-tip">
@@ -30,6 +30,12 @@
       </ng-template>
     </div>
 
+    <ng-container *ngIf="showAnswer">
+      <div class="alert {{alertType()}}" role="alert">
+        <h4 class="alert-heading">{{alertMessage()}}</h4>
+      </div>
+    </ng-container>
+
     <div class="form-check mb-1" *ngFor="let questionAnswer of currentQuestion.answers">
       <label class="form-check-label">
         <input id="answerId" name="answerControl" type="radio" value="{{questionAnswer.answerText}}"
@@ -39,7 +45,7 @@
     </div>
 
     <div class="section-button-submit">
-      <button type="submit" class="btn btn-success btn-lg mt-2">Check</button>
+      <button type="submit" class="btn btn-success btn-lg mt-2">{{submitButtonText()}}</button>
     </div>
   </form>
 </div>
