@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
+import {FormBuilder, Validators} from '@angular/forms';
+import {Quiz} from './quiz';
 
 @Component({
   selector: 'app-question',
@@ -8,25 +10,50 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class QuestionComponent implements OnInit {
 
-  private quizUrl = "http://localhost:8080/quiz/a";
-  private httpOptions = {
-    observe: 'response',
-    responseType: 'json'
-  };
+  private quizUrl = "http://localhost:8080/api/v1/quiz/a";
 
-  private quiz: any;
+  quizForm;
+  title = 'Grammati';
+  tipVisible = false;
 
-  constructor(private httpClient: HttpClient) {
+  currentQuestion;
+
+  answeredQuestions = new Array<any>();
+
+  quiz: Quiz;
+
+  constructor(private httpClient: HttpClient,
+              private formBuilder: FormBuilder) {
+    this.quizForm = this.formBuilder.group({
+      answerControl: [Validators.required]
+    });
   }
 
   ngOnInit() {
-    // const headers = {'Access-Control-Allow-Origin': 'http://localhost:4200/'};
     const headers = {};
     this.httpClient
-      .get<any>(this.quizUrl, {headers, observe: 'body', responseType: 'json'})
+    // .get<any>(this.quizUrl, {headers, observe: 'body', responseType: 'json'})
+      .get<any>("/assets/quiz.json")
       .subscribe(data => {
         this.quiz = data;
+        this.currentQuestion = this.quiz.questions.pop();
       })
+  }
+
+  showTip() {
+    this.tipVisible = true;
+  }
+
+  submitAnswer(answerData: any) {
+    this.quizForm.reset();
+    console.warn('Your question has not been yet submitted', answerData);
+    this.answeredQuestions.push(this.currentQuestion);
+
+    if (this.quiz.questions.length > 0) {
+      this.currentQuestion = this.quiz.questions.pop();
+    } else {
+      console.info("Answers: " + this.answeredQuestions);
+    }
   }
 
 }
