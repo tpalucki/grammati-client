@@ -48,7 +48,7 @@ export class QuestionComponent implements OnInit {
     this.quizForm.reset();
     console.warn('Your question has not been yet submitted', answerData);
     this.answeredQuestions.push(this.currentQuestion);
-
+    this.tipVisible = false;
     if (this.quiz.questions.length > 0) {
       this.currentQuestion = this.quiz.questions.pop();
     } else {
