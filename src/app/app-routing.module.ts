@@ -5,8 +5,8 @@ import {OriginalComponent} from './original/original.component';
 
 
 const routes: Routes = [
+  {path: '', component: OriginalComponent},
   {path: 'quiz/:quizId', component: QuestionComponent},
-  {path: 'original', component: OriginalComponent},
 ];
 
 @NgModule({
