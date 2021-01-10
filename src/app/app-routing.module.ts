@@ -1,17 +1,19 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {QuestionComponent} from './question/question.component';
 import {OriginalComponent} from './original/original.component';
+import {SubscriptionFormComponent} from "./subscription-form/subscription-form.component";
 
 
 const routes: Routes = [
-  {path: '', component: OriginalComponent},
-  {path: 'quiz/:quizId', component: QuestionComponent},
+    {path: '', component: OriginalComponent},
+    {path: 'quiz/:quizId', component: QuestionComponent},
+    {path: 'subscription', component: SubscriptionFormComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule {
 }

@@ -1,0 +1,19 @@
+<div class="container">
+    <h1 class="subscription-heading">Subscribe now for you daily english exercise</h1>
+    <form #subscriptionForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="email"></label>
+            <input #email=ngModel
+                   [(ngModel)]="model.email"
+                   class="form-control"
+                   id="email"
+                   name="email"
+                   required type="email">
+            <div [hidden]="email.valid || email.pristine"
+                 class="alert alert-danger">
+                Email is required
+            </div>
+        </div>
+        <button [disabled]="!subscriptionForm.form.valid" class="btn btn-success" type="submit">Subscribe</button>
+    </form>
+</div>
