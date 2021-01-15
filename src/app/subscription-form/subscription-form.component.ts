@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Subscription} from "./subscription";
-import {ConfigService} from "../service/config.service";
+import {ConfigService} from "../service/config/config.service";
+import {SubscriptionService} from "../service/subscription/subscription.service";
 
 @Component({
     selector: 'app-subscription',
@@ -13,7 +14,8 @@ export class SubscriptionFormComponent implements OnInit {
     model = new Subscription(null);
     title: string;
 
-    constructor(private configService: ConfigService) {
+    constructor(private configService: ConfigService,
+                private subscriptionService: SubscriptionService) {
         this.title = configService.title;
     }
 
@@ -24,5 +26,6 @@ export class SubscriptionFormComponent implements OnInit {
     onSubmit() {
         console.info('Submitted');
         this.submitted = true;
+        this.subscriptionService.subscribe(this.model.email);
     }
 }
