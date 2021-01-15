@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ConfigService} from "../service/config/config.service";
 import {SubscriptionService} from "../service/subscription/subscription.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {SubscriptionData} from "./model/subscription-data";
 
 @Component({
     selector: 'app-subscription',
@@ -13,6 +14,9 @@ export class SubscriptionFormComponent implements OnInit {
     submitted: boolean;
     title: string;
     subscriptionFormGroup = new FormGroup({
+        nameFormControl: new FormControl('', [
+            Validators.required
+        ]),
         emailFormControl: new FormControl('', [
             Validators.required,
             Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
@@ -32,7 +36,10 @@ export class SubscriptionFormComponent implements OnInit {
         console.info('Submitted');
         this.submitted = true;
         this.subscriptionService.subscribe(
-            this.subscriptionFormGroup.get('emailFormControl').value
+            new SubscriptionData(
+                this.subscriptionFormGroup.get('nameFormControl').value,
+                this.subscriptionFormGroup.get('emailFormControl').value
+            )
         );
     }
 }

@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {SubscriptionData} from "../../subscription-form/model/subscription-data";
 
 @Injectable({
     providedIn: 'root'
@@ -8,7 +9,7 @@ export class SubscriptionService {
     constructor() {
     }
 
-    subscribe(email: string): void {
-        console.log(`SubscriptionService: subscribe ${email}`);
+    subscribe(data: SubscriptionData): void {
+        console.log(`SubscriptionService: subscribe ${data.name} with ${data.email}`);
     }
 }
