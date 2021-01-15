@@ -42,4 +42,12 @@ export class SubscriptionFormComponent implements OnInit {
             )
         );
     }
+
+    get nameControl() {
+        return this.subscriptionFormGroup.get('nameFormControl');
+    }
+
+    get emailControl() {
+        return this.subscriptionFormGroup.get('emailFormControl')
+    }
 }

@@ -14,27 +14,31 @@
 
         <div class="form-group">
             <label for="name">Your name:</label>
-            <input class="form-control"
+            <input [class.is-invalid]="nameControl.invalid && nameControl.touched"
+                   class="form-control"
                    formControlName="nameFormControl"
                    id="name"
                    type="text">
             <div
-                [hidden]="subscriptionFormGroup.get('nameFormControl').valid || subscriptionFormGroup.get('nameFormControl').pristine"
+                [hidden]="nameControl.valid || nameControl.pristine"
                 class="alert alert-danger">
-                Valid name is required
+                <div *ngIf="nameControl.errors?.required">Name is required</div>
             </div>
         </div>
 
         <div class="form-group">
             <label for="email">Your email:</label>
-            <input class="form-control"
+            <input [class.is-invalid]="emailControl.invalid && emailControl.touched"
+                   class="form-control"
                    formControlName="emailFormControl"
                    id="email"
                    type="email">
             <div
-                [hidden]="subscriptionFormGroup.get('emailFormControl').valid || subscriptionFormGroup.get('emailFormControl').pristine"
+                [hidden]="emailControl.valid || emailControl.pristine"
                 class="alert alert-danger">
-                Valid email is required
+                <div *ngIf="emailControl.errors?.required">Email is required</div>
+                <div *ngIf="emailControl.errors?.pattern">Please provide a valid email</div>
+
             </div>
         </div>
         <button [disabled]="!subscriptionFormGroup.valid" class="btn btn-success" type="submit">Subscribe</button>
