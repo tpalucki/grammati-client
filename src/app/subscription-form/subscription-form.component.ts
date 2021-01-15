@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Subscription} from "./subscription";
+import {ConfigService} from "../service/config.service";
 
 @Component({
     selector: 'app-subscription',
@@ -10,8 +11,10 @@ export class SubscriptionFormComponent implements OnInit {
 
     submitted: boolean;
     model = new Subscription(null);
+    title: string;
 
-    constructor() {
+    constructor(private configService: ConfigService) {
+        this.title = configService.title;
     }
 
     ngOnInit() {
