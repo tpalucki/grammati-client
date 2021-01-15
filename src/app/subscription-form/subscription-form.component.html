@@ -10,20 +10,20 @@
 </nav>
 <div class="container">
     <h1 class="subscription-heading">Subscribe now for you daily english exercise</h1>
-    <form #subscriptionForm="ngForm" (ngSubmit)="onSubmit()">
+    <!--    <form #subscriptionForm="ngForm" (ngSubmit)="onSubmit()" [formGroup]="subscriptionFormGroup">-->
+    <form (ngSubmit)="onSubmit()" [formGroup]="subscriptionFormGroup">
         <div class="form-group">
-            <label for="email"></label>
-            <input #email=ngModel
-                   [(ngModel)]="model.email"
-                   class="form-control"
+            <label for="email">Your email:</label>
+            <input class="form-control"
+                   formControlName="emailFormControl"
                    id="email"
-                   name="email"
-                   required type="email">
-            <div [hidden]="email.valid || email.pristine"
-                 class="alert alert-danger">
+                   type="email">
+            <div
+                [hidden]="subscriptionFormGroup.get('emailFormControl').valid || subscriptionFormGroup.get('emailFormControl').pristine"
+                class="alert alert-danger">
                 Email is required
             </div>
         </div>
-        <button [disabled]="!subscriptionForm.form.valid" class="btn btn-success" type="submit">Subscribe</button>
+        <button [disabled]="!subscriptionFormGroup.valid" class="btn btn-success" type="submit">Subscribe</button>
     </form>
 </div>
