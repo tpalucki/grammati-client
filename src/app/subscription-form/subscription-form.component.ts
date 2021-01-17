@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {ConfigService} from "../service/config/config.service";
 import {SubscriptionService} from "../service/subscription/subscription.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {SubscriptionData} from "./model/subscription-data";
@@ -22,9 +21,7 @@ export class SubscriptionFormComponent implements OnInit {
         ])
     });
 
-    constructor(private configService: ConfigService,
-                private subscriptionService: SubscriptionService) {
-        this.title = configService.title;
+    constructor(private subscriptionService: SubscriptionService) {
     }
 
     ngOnInit() {
