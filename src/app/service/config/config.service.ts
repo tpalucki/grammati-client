@@ -13,4 +13,8 @@ export class ConfigService {
     get title(): string {
         return this._title;
     }
+
+    get footer(): string {
+        return '© ' + new Date().getFullYear() + ' ' + this.title;
+    }
 }
