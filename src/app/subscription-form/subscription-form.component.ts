@@ -12,7 +12,6 @@ import {SubscriptionData} from "./model/subscription-data";
 export class SubscriptionFormComponent implements OnInit {
 
     submitted: boolean;
-    title: string;
     subscriptionFormGroup = new FormGroup({
         nameFormControl: new FormControl('', [
             Validators.required

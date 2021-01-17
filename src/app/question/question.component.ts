@@ -13,7 +13,6 @@ export class QuestionComponent implements OnInit {
   private quizUrl = "http://localhost:8080/api/v1/quiz/a";
 
   quizForm;
-  title = 'Grammati';
   tipVisible = false;
   currentQuestion;
   answeredQuestions = new Array<any>();
