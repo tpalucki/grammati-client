@@ -10,4 +10,8 @@ export class AppComponent {
 
     constructor(private configService: ConfigService) {
     }
+
+    get footer(): string {
+        return this.configService.footer;
+    }
 }
