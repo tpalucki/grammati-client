@@ -1,0 +1,23 @@
+{
+    "id": 13,
+    "sessionId": "a",
+    "questions": [
+        {
+            "id": 4,
+            "question": "Water boils/is boiling at 100°C.",
+            "answers": [
+                {
+                    "id": 6,
+                    "answerText": "is boiling",
+                    "correct": false
+                },
+                {
+                    "id": 5,
+                    "answerText": "boils",
+                    "correct": true
+                }
+            ],
+            "tip": "We use the present simple for things that are true in general."
+        }
+    ]
+}

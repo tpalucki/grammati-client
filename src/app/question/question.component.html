@@ -1,8 +1,7 @@
 <app-navbar></app-navbar>
 <div *ngIf="currentQuestion" class="container">
-    <h1 class="question-heading">{{currentQuestion.question}}</h1>
-
-    <form (ngSubmit)="handleSubmitButtonClick(quizForm.value)" [formGroup]="quizForm">
+    <form (ngSubmit)="handleSubmitButtonClick(quizForm.value)" *ngIf="inProgress" [formGroup]="quizForm">
+        <h1 class="question-heading">{{currentQuestion.question}}</h1>
         <div class="section-tip">
             <ng-container *ngIf="tipVisible; else tipButton">
                 <div class="alert alert-info" id="tip-para">
@@ -27,9 +26,12 @@
             </label>
             <br/>
         </div>
-
         <div class="section-button-submit">
             <button class="btn btn-success btn-lg mt-2" type="submit">{{submitButtonText()}}</button>
         </div>
     </form>
+
+    <div *ngIf="!inProgress">
+        <h1 class="question-heading">That's all for today!</h1>
+    </div>
 </div>

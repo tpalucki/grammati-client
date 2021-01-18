@@ -17,6 +17,7 @@ export class QuestionComponent implements OnInit {
     answeredQuestions = new Array<any>();
     quiz: Quiz;
     showAnswer = false;
+    inProgress = true;
     private quizUrl = "http://localhost:8080/api/v1/quiz/a";
 
     constructor(private httpClient: HttpClient,
@@ -30,7 +31,8 @@ export class QuestionComponent implements OnInit {
         const headers = {};
         this.httpClient
         // .get<any>(this.quizUrl, {headers, observe: 'body', responseType: 'json'})
-            .get<any>("/assets/quiz.json")
+        //     .get<any>("/assets/quiz.json")
+            .get<any>("/assets/quiz-simple.json")
             .subscribe(data => {
                 this.quiz = data;
                 this.showNextQuestion();
@@ -85,6 +87,10 @@ export class QuestionComponent implements OnInit {
     }
 
     private showNextQuestion() {
-        this.currentQuestion = this.quiz.questions.pop();
+        if (this.quiz.questions.length === 0) {
+            this.inProgress = false;
+        } else {
+            this.currentQuestion = this.quiz.questions.pop();
+        }
     }
 }
