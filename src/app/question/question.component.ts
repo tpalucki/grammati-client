@@ -32,7 +32,7 @@ export class QuestionComponent implements OnInit {
         this.httpClient
         // .get<any>(this.quizUrl, {headers, observe: 'body', responseType: 'json'})
         //     .get<any>("/assets/quiz.json")
-            .get<any>("/assets/quiz-simple.json")
+            .get<any>("/assets/quiz.json")
             .subscribe(data => {
                 this.quiz = data;
                 this.showNextQuestion();

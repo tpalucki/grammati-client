@@ -1,17 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ConfigService} from "../service/config/config.service";
 
 @Component({
-  selector: 'app-original',
-  templateUrl: './original.component.html',
-  styleUrls: ['./original.component.scss']
+    selector: 'app-original',
+    templateUrl: './original.component.html',
+    styleUrls: ['./original.component.scss']
 })
 export class OriginalComponent implements OnInit {
 
-  title = 'grammati-client';
+    title: string;
 
-  constructor() { }
+    constructor(private configService: ConfigService) {
+        this.title = configService.title;
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
 }

@@ -5,7 +5,7 @@ import {Injectable} from '@angular/core';
 })
 export class ConfigService {
 
-    private _title = 'Grammati';
+    private _title = 'Gramilka';
 
     constructor() {
     }
