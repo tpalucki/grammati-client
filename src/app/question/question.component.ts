@@ -18,7 +18,8 @@ export class QuestionComponent implements OnInit {
     quiz: Quiz;
     showAnswer = false;
     inProgress = true;
-    private quizUrl = "http://localhost:8080/api/v1/quiz/a";
+    // private quizUrl = "http://localhost:8080/api/v1/quiz/a";
+    private quizUrl = "http://localhost:8080/api/quiz";
 
     constructor(private httpClient: HttpClient,
                 private formBuilder: FormBuilder) {
@@ -30,11 +31,12 @@ export class QuestionComponent implements OnInit {
     ngOnInit() {
         const headers = {};
         this.httpClient
-        // .get<any>(this.quizUrl, {headers, observe: 'body', responseType: 'json'})
-        //     .get<any>("/assets/quiz.json")
-            .get<any>("/assets/quiz.json")
+            .get<any>(this.quizUrl, {headers, observe: 'body', responseType: 'json'})
+            //     .get<any>("/assets/quiz.json")
+            //     .get<any>("/assets/quiz.json")
             .subscribe(data => {
-                this.quiz = data;
+                // this.quiz = data;
+                this.quiz = data[0];
                 this.showNextQuestion();
             })
     }
