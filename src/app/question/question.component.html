@@ -2,7 +2,7 @@
 <div *ngIf="currentQuestion" class="container">
     <form (ngSubmit)="handleSubmitButtonClick(quizForm.value)" *ngIf="inProgress" [formGroup]="quizForm">
         <h1 class="question-heading">{{currentQuestion.question}}</h1>
-        <div class="section-tip">
+        <div *ngIf="currentQuestion.tip" class="section-tip">
             <ng-container *ngIf="tipVisible; else tipButton">
                 <div class="alert alert-info" id="tip-para">
                     <p>{{currentQuestion.tip}}</p>
