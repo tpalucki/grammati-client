@@ -1,0 +1,13 @@
+{
+    "quizId": 111,
+    "sessionId": "abc",
+    "question": {
+        "questionId": 222,
+        "questionText": "How are you?"
+    },
+    "answer": {
+        "answerId": 333,
+        "answerText": "This is my answer",
+        "correct": true
+    }
+}

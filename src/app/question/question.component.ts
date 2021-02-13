@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {FormBuilder, Validators} from '@angular/forms';
 import {Quiz} from './model/quiz';
 import {Question} from "./model/question";
+import {Answer} from "./model/answer";
 
 @Component({
     selector: 'app-question',
@@ -15,11 +16,11 @@ export class QuestionComponent implements OnInit {
     tipVisible = false;
     currentQuestion: Question;
     answeredQuestions = new Array<any>();
-    answers = new Array<any>();
     quiz: Quiz;
     showAnswer = false;
     inProgress = true;
     private quizUrl = "http://localhost:8080/api/quiz/abc";
+    private answerUrl = "http://localhost:8080/api/answer";
 
     constructor(private httpClient: HttpClient,
                 private formBuilder: FormBuilder) {
@@ -58,19 +59,40 @@ export class QuestionComponent implements OnInit {
         } else {
             console.info('show answer');
             this.showAnswer = true;
+            this.quizForm.disable();
             this.answeredQuestions.push(this.currentQuestion);
+
+            const answerText = this.quizForm.get('answerControl').value;
+            const answerObject = this.currentQuestion.answers.find(answer => answer.answerText === answerText);
+            console.info('Answer object: ' + JSON.stringify(answerObject));
+            this.postAnswer(answerObject);
         }
     }
 
+    private postAnswer(answer: Answer) {
+        const headers = {};
+        const body = {
+            quizId: this.quiz.quizId,
+            sessionId: this.quiz.sessionId,
+            question: {
+                questionId: this.currentQuestion.questionId,
+                questionText: this.currentQuestion.question
+            },
+            answer: {
+                answerId: answer.answerId,
+                answerText: answer.answerText,
+                correct: answer.correct
+            }
+        };
+        console.log("Posting answer: " + JSON.stringify(body));
+        this.httpClient.post(this.answerUrl, body, {headers, observe: 'body'}).subscribe(data => {
+            console.log("Response: " + data);
+        });
+    }
+
     isAnswerCorrect(): boolean {
-        this.quizForm.disable();
         const answerText = this.quizForm.get('answerControl').value;
         const answerObject = this.currentQuestion.answers.find(answer => answer.answerText === answerText);
-
-        this.answers.push({
-            questionId: this.currentQuestion.id,
-            answer: answerObject
-        });
 
         return answerObject.correct;
     }
