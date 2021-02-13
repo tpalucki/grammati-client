@@ -21,8 +21,8 @@
 
         <div *ngFor="let questionAnswer of currentQuestion.answers" class="form-check mb-1">
             <label class="form-check-label">
-                <input class="form-check-input" id="answerId" name="answerControl" type="radio"
-                       value="{{questionAnswer.answerText}}"/><span>{{questionAnswer.answerText}}</span>
+                <input class="form-check-input" formControlName="answerControl" id="questionAnswer{{questionAnswer.id}}"
+                       type="radio" value="{{questionAnswer.answerText}}"/><span>{{questionAnswer.answerText}}</span>
             </label>
             <br/>
         </div>

@@ -15,6 +15,7 @@ export class QuestionComponent implements OnInit {
     tipVisible = false;
     currentQuestion: Question;
     answeredQuestions = new Array<any>();
+    answers = new Array<any>();
     quiz: Quiz;
     showAnswer = false;
     inProgress = true;
@@ -47,9 +48,11 @@ export class QuestionComponent implements OnInit {
     }
 
     handleSubmitButtonClick(answerData: any) {
+        console.log("Answer data: " + JSON.stringify(answerData)); // TODO we can retrieve the form data with the passed argument
         if (this.showAnswer) {
             console.info('next question');
             this.showAnswer = false;
+            this.quizForm.enable();
             this.hideTip();
             this.showNextQuestion();
         } else {
@@ -59,18 +62,17 @@ export class QuestionComponent implements OnInit {
         }
     }
 
-    nextQuestion() {
-        this.quizForm.reset();
-        this.tipVisible = false;
-
-        if (this.quiz.questions.length) {
-            this.showNextQuestion();
-        }
-
-    }
-
     isAnswerCorrect(): boolean {
-        return true;
+        this.quizForm.disable();
+        const answerText = this.quizForm.get('answerControl').value;
+        const answerObject = this.currentQuestion.answers.find(answer => answer.answerText === answerText);
+
+        this.answers.push({
+            questionId: this.currentQuestion.id,
+            answer: answerObject
+        });
+
+        return answerObject.correct;
     }
 
     alertType(): string {
@@ -78,7 +80,7 @@ export class QuestionComponent implements OnInit {
     }
 
     alertMessage(): string {
-        return this.isAnswerCorrect() ? 'Well done!' : 'Wrong';
+        return this.isAnswerCorrect() ? 'Well done!' : 'Next time will be better!';
     }
 
     submitButtonText() {
