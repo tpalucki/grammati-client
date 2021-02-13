@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {FormBuilder, Validators} from '@angular/forms';
 import {Quiz} from './model/quiz';
 import {Question} from "./model/question";
@@ -70,7 +70,7 @@ export class QuestionComponent implements OnInit {
     }
 
     private postAnswer(answer: Answer) {
-        const headers = {};
+        const headers = new HttpHeaders().set('Content-type', 'application/json');
         const body = {
             quizId: this.quiz.quizId,
             sessionId: this.quiz.sessionId,
