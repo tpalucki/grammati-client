@@ -4,6 +4,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {Quiz} from './model/quiz';
 import {Question} from "./model/question";
 import {Answer} from "./model/answer";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'app-question',
@@ -19,14 +20,21 @@ export class QuestionComponent implements OnInit {
     quiz: Quiz;
     showAnswer = false;
     inProgress = true;
-    private quizUrl = "http://localhost:8080/api/quiz/abc";
+    private sessionId;
+    private quizUrlBase = "http://localhost:8080/api/quiz";
+    private quizUrl;
     private answerUrl = "http://localhost:8080/api/answer";
 
     constructor(private httpClient: HttpClient,
-                private formBuilder: FormBuilder) {
+                private formBuilder: FormBuilder,
+                private activatedRoute: ActivatedRoute) {
         this.quizForm = this.formBuilder.group({
             answerControl: [Validators.required]
         });
+        this.activatedRoute.paramMap.subscribe(params => {
+            this.sessionId = params.get('quizId');
+            this.quizUrl = this.quizUrlBase + '/' + this.sessionId;
+        })
     }
 
     ngOnInit() {
