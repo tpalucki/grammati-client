@@ -15,6 +15,6 @@ export class ConfigService {
     }
 
     get footer(): string {
-        return '© ' + new Date().getFullYear() + ' ' + this.title;
+        return '© 2020 - ' + new Date().getFullYear() + ' ' + this.title;
     }
 }
