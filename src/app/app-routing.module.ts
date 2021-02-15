@@ -10,6 +10,7 @@ const routes: Routes = [
     {path: '', component: OriginalComponent},
     {path: 'quiz/:quizId', component: QuestionComponent},
     {path: 'subscription', component: SubscriptionFormComponent},
+    {path: 'subscription/confirm', component: SubscriptionConfirmationComponent},
     {path: 'subscription/confirm/:subscriptionId', component: SubscriptionConfirmationComponent}
 ];
 

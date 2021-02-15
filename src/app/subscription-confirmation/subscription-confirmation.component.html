@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <div class="container">
-    <h1 class="question-heading">Confirming subscription...</h1>
+    <h1 class="question-heading">{{messageHeader}}</h1>
 
     <ng-container *ngIf="message">
         <div class="alert {{alertType()}}" role="alert">

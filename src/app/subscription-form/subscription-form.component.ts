@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SubscriptionService} from "../service/subscription/subscription.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {SubscriptionData} from "./model/subscription-data";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-subscription',
@@ -21,7 +22,8 @@ export class SubscriptionFormComponent implements OnInit {
         ])
     });
 
-    constructor(private subscriptionService: SubscriptionService) {
+    constructor(private subscriptionService: SubscriptionService,
+                private router: Router) {
     }
 
     ngOnInit() {
@@ -37,6 +39,9 @@ export class SubscriptionFormComponent implements OnInit {
                 this.subscriptionFormGroup.get('emailFormControl').value
             )
         );
+
+        this.router.navigate(['/subscription/confirm']);
+
     }
 
     get nameControl() {
