@@ -10,6 +10,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SubscriptionFormComponent} from "./subscription-form/subscription-form.component";
 import {NavbarComponent} from './component/navbar/navbar.component';
 import {ProgressBarComponent} from './component/progress-bar/progress-bar.component';
+import {SubscriptionConfirmationComponent} from './subscription-confirmation/subscription-confirmation.component';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import {ProgressBarComponent} from './component/progress-bar/progress-bar.compon
         OriginalComponent,
         SubscriptionFormComponent,
         NavbarComponent,
-        ProgressBarComponent
+        ProgressBarComponent,
+        SubscriptionConfirmationComponent
     ],
     imports: [
         BrowserModule,
