@@ -5,6 +5,7 @@ import {Quiz} from './model/quiz';
 import {Question} from "./model/question";
 import {Answer} from "./model/answer";
 import {ActivatedRoute} from "@angular/router";
+import {environment} from "../../environments/environment";
 
 @Component({
     selector: 'app-question',
@@ -21,9 +22,9 @@ export class QuestionComponent implements OnInit {
     showAnswer = false;
     inProgress = true;
     private sessionId;
-    private quizUrlBase = "http://localhost:8080/api/quiz";
+    private quizUrlBase = 'http://' + environment.backend_host + '/api/quiz';
     private quizUrl;
-    private answerUrl = "http://localhost:8080/api/answer";
+    private answerUrl = 'http://' + environment.backend_host + '/api/answer';
 
     constructor(private httpClient: HttpClient,
                 private formBuilder: FormBuilder,

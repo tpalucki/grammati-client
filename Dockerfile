@@ -13,7 +13,7 @@ COPY ./ /usr/local/app/
 RUN npm install
 
 # Generate the build of the application
-RUN npm run build
+RUN npm run build --prod
 
 # Stage 2: Serve app with nginx server
 # Use official nginx image as the base image
@@ -25,7 +25,7 @@ COPY --from=build /usr/local/app/dist/grammati-client /usr/share/nginx/html
 # Expose port 80
 EXPOSE 80
 
-COPY docker/angular.conf /etc/nginx/conf.d/
+COPY src/docker /etc/nginx/conf.d/
 
 # Remove default configuration which serves static content from /usr/share/nginx/html - overrides the above
 RUN rm /etc/nginx/conf.d/default.conf

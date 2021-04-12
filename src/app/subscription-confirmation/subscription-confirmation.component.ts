@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
+import {environment} from "../../environments/environment";
 
 @Component({
     selector: 'app-subscription-confirmation',
@@ -15,7 +16,7 @@ export class SubscriptionConfirmationComponent implements OnInit {
         success: boolean;
     };
     private subscriptionId: string;
-    private subscriptionConfirmationUrl = 'http://localhost:8080/api/subscription/';
+    private subscriptionConfirmationUrl = 'http://' + environment.backend_host + '/api/subscription/';
 
     constructor(private httpClient: HttpClient,
                 private activatedRoute: ActivatedRoute) {
