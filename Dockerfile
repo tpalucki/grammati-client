@@ -25,7 +25,7 @@ COPY --from=build /usr/local/app/dist/grammati-client /usr/share/nginx/html
 # Expose port 80
 EXPOSE 80
 
-COPY src/docker /etc/nginx/conf.d/
+COPY src/docker/nginx /etc/nginx/conf.d/
 
 # Remove default configuration which serves static content from /usr/share/nginx/html - overrides the above
 RUN rm /etc/nginx/conf.d/default.conf
